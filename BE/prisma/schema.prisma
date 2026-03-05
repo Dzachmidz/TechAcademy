@@ -1,0 +1,161 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_PRISMA_URL")
+  directUrl = env("DATABASE_URL_NON_POOLING")
+}
+
+model Users {
+  id              Int               @id @default(autoincrement())
+  fullName        String
+  email           String            @unique
+  password        String?
+  noTelp          String?
+  city            String?
+  country         String?
+  profilePicture  String?
+  fileId          String?
+  isActivated     Boolean           @default(false)
+  isAdmin         Boolean           @default(false)
+  googleId        String?
+  notification    Notifications[]
+  transactions    Transactions[]
+  activationCodes ActivationCodes[]
+  resetCodes      ResetCodes[]
+  learning        Learning[]
+  ratings         Rating[]
+}
+
+model ActivationCodes {
+  id             Int      @id @default(autoincrement())
+  userId         Int      @unique
+  activationCode String
+  createdAt      DateTime @default(now())
+  users          Users    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model ResetCodes {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  resetCode String
+  createdAt DateTime @default(now())
+  users     Users    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model Notifications {
+  id        Int      @id @default(autoincrement())
+  title     String
+  body      String
+  deskripsi String?
+  dateTime  DateTime @default(now())
+  userId    Int
+  users     Users    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model Categorys {
+  id                       Int     @id @default(autoincrement())
+  categoryName             String  @unique
+  thumbnailPictureCategory String
+  fileId                   String
+  class                    Class[]
+}
+
+model Learning {
+  id             Int     @id @default(autoincrement())
+  is_buy         Boolean @default(false)
+  inProgress     Boolean @default(false)
+  presentase     Int     @default(0)
+  prevPresentase Int     @default(0)
+  classCode      String
+  lessonId       Int
+  userId         Int
+  isView         Boolean @default(false)
+  class          Class   @relation(fields: [classCode], references: [classCode], onUpdate: Cascade, onDelete: Cascade)
+  lesson         Lessons @relation(fields: [lessonId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  users          Users   @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+}
+
+model Class {
+  classCode        String         @id @unique
+  className        String
+  description      String
+  thumbnailPicture String
+  fileId           String
+  price            Int
+  promo            Int            @default(0)
+  linkSosmed       String
+  levelName        String
+  author           String
+  isFree           Boolean
+  views            Int            @default(0)
+  module           Int            @default(0)
+  totalDuration    Int            @default(0)
+  averageRating    Float          @default(0)
+  createdAt        DateTime       @default(now())
+  categoryId       Int
+  categorys        Categorys      @relation(fields: [categoryId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  ratings          Rating[]
+  learning         Learning[]
+  chapters         Chapters[]
+  transactions     Transactions[]
+}
+
+model Rating {
+  id        Int    @id @default(autoincrement())
+  value     Int
+  userId    Int
+  classCode String
+  users     Users  @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  class     Class  @relation(fields: [classCode], references: [classCode], onUpdate: Cascade, onDelete: Cascade)
+}
+
+model Chapters {
+  id            Int       @id @default(autoincrement())
+  chapterName   String
+  classCode     String
+  is_preview    Boolean   @default(false)
+  totalDuration Int       @default(0)
+  class         Class     @relation(fields: [classCode], references: [classCode], onUpdate: Cascade, onDelete: Cascade)
+  Lessons       Lessons[]
+}
+
+model Lessons {
+  id                   Int        @id @default(autoincrement())
+  title                String
+  learningMaterial     String
+  linkLearningMaterial String
+  duration             Int
+  isView               Boolean    @default(false)
+  chapterId            Int
+  chapters             Chapters   @relation(fields: [chapterId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  learning             Learning[]
+}
+
+model Transactions {
+  id            Int      @id @default(autoincrement())
+  status        Boolean  @default(false)
+  paymentMethod String?
+  bankId        Int?
+  cardName      String?
+  cardNumber    String?
+  createdAt     DateTime @default(now())
+  userId        Int
+  classCode     String
+  users         Users    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  class         Class    @relation(fields: [classCode], references: [classCode], onUpdate: Cascade, onDelete: Cascade)
+  bank          Bank?    @relation(fields: [bankId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+}
+
+model Bank {
+  id           Int            @id @default(autoincrement())
+  bankType     String         @unique
+  bankName     String?
+  bankNumber   String?
+  transactions Transactions[]
+}

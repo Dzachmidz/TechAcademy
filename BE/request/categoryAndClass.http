@@ -1,0 +1,62 @@
+### CATEGORY CREATE
+POST http://localhost:3000/api/v1/category
+Content-Type: application/json
+
+{
+    "categoryName":"Product Management",
+    "thumbnailPictureCategory"
+}
+
+#### GET ALL CATEGORY AND INCLUDE CLASS ALL
+GET http://localhost:3000/api/v1/category
+
+
+### CATEGORY BY ID
+GET http://localhost:3000/api/v1/category/1
+
+
+### CATEGORY UPDATE
+PUT http://localhost:3000/api/v1/category/2
+Content-Type: application/json
+
+{
+    "categoryName":"UI/UX DESIGN UPDATE"
+}
+
+### CATEGORY BY ID
+DELETE http://localhost:3000/api/v1/category/1
+
+
+#### CLASS ENDPOINT GetByClassCode AND PUT ###
+GET http://localhost:3000/api/v1/class?promo=true
+
+#####
+GET http://localhost:3000/api/v1/class
+
+##### GET CLASS INPROGRESS
+GET http://localhost:3000/api/v1/class/joinclass/ML2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMkBnbWFpbC5jb20iLCJpYXQiOjE3MDM5MDg4NjB9.sMg84VSxiOwXDKjyuojF8cHbRmrahlCfXivu54ZF8iU
+
+
+#####
+GET http://localhost:3000/api/v1/class/WD0
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTcwMzQ4OTczOH0.rV1jq4crxzipa8SlmsCICQxa4EUFFJWYSRXhcfkMqMo
+
+####
+PUT http://localhost:3000/api/v1/class/PM0
+Content-Type: application/json
+
+{
+    "className":"update",
+    "description":"update",
+    "price":2000,
+    "isFree":"true",
+    "levelName":"Beginner",
+    "author":"by joe doel",
+    "promo":0,
+    "categoryId":"1",
+    "linkSosmed":"owkokw"
+}
+
+####
+DELETE http://localhost:3000/api/v1/class/U0

@@ -1,0 +1,19 @@
+# ### Update inProgress
+# GET http://localhost:3000/api/v1/learning/MD1
+# Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhbG9AZ21haWwuY29tIiwiaWF0IjoxNzAyNDc1MjMyfQ.sZkUETxFWAsvf32k__hI9rcLc1o6B_DjAeykVTlh0mE
+
+### GET ALL
+GET http://localhost:3000/api/v1/learning
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMkBnbWFpbC5jb20iLCJpYXQiOjE3MDM5MDg4NjB9.sMg84VSxiOwXDKjyuojF8cHbRmrahlCfXivu54ZF8iU
+
+### GET ALL LEARNING BY CLASSCODE
+GET http://localhost:3000/api/v1/learning/all
+Authorization: apaneeeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMkBnbWFpbC5jb20iLCJpYXQiOjE3MDM5MDg4NjB9.sMg84VSxiOwXDKjyuojF8cHbRmrahlCfXivu54ZF8iU
+
+### SEARCH LEARNING
+GET http://localhost:3000/api/v1/learning/all?search=test
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGdtYWlsLmNvbSIsImlhdCI6MTcwMzA4NDcxMX0.P_miAz_485HOuQsqoEAOnsRc7JsONBQ7nhbdtlYhhTE
+
+### GET LEARNING BY CLASSCODE
+GET http://localhost:3000/api/v1/learning/DA0
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGdtYWlsLmNvbSIsImlhdCI6MTcwMzA4NDcxMX0.P_miAz_485HOuQsqoEAOnsRc7JsONBQ7nhbdtlYhhTE
